@@ -5,7 +5,7 @@ function setGradientBackground() {
 
   let gradient, imageUrl;
 
-  if ((hours > 6 || (hours === 6 && minutes >= 30)) && (hours < 15 || (hours === 15 && minutes < 30))) {
+  if ((hours > 6 || (hours === 6 && minutes >= 30)) && (hours < 17 || (hours === 17 && minutes < 30))) {
     gradient = "linear-gradient(to bottom, #87CEEB, #FFFFFF)"; 
     imageUrl = 'tubes_light.png';
     document.body.style.color = "#151515";
