@@ -61,11 +61,17 @@ h4 {
     font-size: xx-small;
     padding: 10px;
 	z-index: 4;
+	position: relative;
+    bottom: -81vh;
 }
 
 @media (max-height: 900px) {
   #downloadButton {
-    margin-top: 80vh !important;
+    bottom: -70vh !important;
+  }
+  
+  h4 {
+	bottom: -71vh;
   }
   
   .center-image {
@@ -93,7 +99,8 @@ h4 {
   border-radius: 30px; 
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-top: 75vh;
+  position: relative;
+  bottom: -80vh;
   z-index: 4;
 }
 
