@@ -58,9 +58,20 @@ h1 {
 }
 
 h4 {
-	
-	font-size: small; 
-	
+    font-size: xx-small;
+    padding: 10px;
+	z-index: 4;
+}
+
+@media (max-height: 900px) {
+  #downloadButton {
+    margin-top: 80vh !important;
+  }
+  
+  .center-image {
+    top: 48vh !important;
+    width: 50% !important;
+  }
 }
 
 .center-image {
