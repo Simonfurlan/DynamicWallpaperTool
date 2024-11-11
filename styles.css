@@ -13,7 +13,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  height: 110vh;
   margin: 0;
   font-family: Arial, sans-serif;
   color: white;
@@ -47,50 +47,33 @@ body {
 }
 
 h1 {
+  position: sticky;
   font-size: xxx-large; 
   margin: 0;
   padding: 0;
-  position: absolute;
-  top: 15vh; 
-  transform: translateY(-50%);
   z-index: 2; 
   font-family: 'CustomFont', sans-serif; 
+  margin-top: 13vh;
 }
 
 h4 {
     font-size: xx-small;
     padding: 10px;
 	z-index: 4;
-	position: relative;
-    bottom: -81vh;
-}
-
-@media (max-height: 900px) {
-  #downloadButton {
-    bottom: -70vh !important;
-  }
-  
-  h4 {
-	bottom: -71vh;
-  }
-  
-  .center-image {
-    top: 48vh !important;
-    width: 50% !important;
-  }
+	position: sticky;
 }
 
 .center-image {
-  position: absolute;
-  top: 45vh;
-  transform: translateY(-50%);
+  position: sticky;
   max-width: 400px; 
   width: 50%; 
   height: auto;
   z-index: 2;
+  margin-top: 30px;
 }
 
 #downloadButton {
+  position: sticky;
   background-color: #ffffff;
   color: black;
   padding: 15px 32px;
@@ -99,9 +82,8 @@ h4 {
   border-radius: 30px; 
   cursor: pointer;
   transition: background-color 0.3s;
-  position: relative;
-  bottom: -80vh;
   z-index: 4;
+  margin-top: 50px;
 }
 
 #downloadButton:hover {
