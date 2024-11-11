@@ -51,15 +51,21 @@ h1 {
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 20%; 
+  top: 15vh; 
   transform: translateY(-50%);
   z-index: 2; 
   font-family: 'CustomFont', sans-serif; 
 }
 
+h4 {
+	
+	font-size: small; 
+	
+}
+
 .center-image {
   position: absolute;
-  top: 50%;
+  top: 45vh;
   transform: translateY(-50%);
   max-width: 400px; 
   width: 50%; 
@@ -76,7 +82,8 @@ h1 {
   border-radius: 30px; 
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-top: 80vh;
+  margin-top: 75vh;
+  z-index: 4;
 }
 
 #downloadButton:hover {
