@@ -5,10 +5,10 @@ function setGradientBackground() {
 
   let gradient, imageUrl;
 
-  if ((hours > 6 || (hours === 6 && minutes >= 30)) && (hours < 17 || (hours === 17 && minutes < 30))) {
-    gradient = "linear-gradient(to bottom, #87CEEB, #FFFFFF)"; 
+  if ((hours > 6 || (hours === 6 && minutes >= 30)) && (hours < 19 || (hours === 19 && minutes < 30))) {
+    gradient = "linear-gradient(to bottom, #2badf8, #000000)"; 
     imageUrl = 'tubes_light.png';
-    document.body.style.color = "#151515";
+    document.body.style.color = "#000000";
   } else {
     gradient = "linear-gradient(to bottom, #8a2ffc, #000000)";
     imageUrl = 'tubes_dark.png';

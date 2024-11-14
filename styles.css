@@ -75,15 +75,14 @@ h4 {
     padding: 10px;
 	z-index: 4;
 	position: sticky;
+	color: white;
 }
 
 .center-image {
   color: grey;
   display: inline-block;
   mask: linear-gradient(-60deg, #000 30%, #0005, #000 70%) right/350% 100%;
-  animation: shimmer 2.5s;
-  font-size: 50px;
-  max-width: 200px;
+  animation: shimmer 2.5s 1s;
 }
 
 @keyframes shimmer {
@@ -92,13 +91,21 @@ h4 {
   }
 }
 
+.background-container {
+	z-index:5;
+	position: sticky;
+    background-color: white;
+    border-radius: 35px;
+	margin-top: 30px;
+}
+
 .center-image {
   position: sticky;
   max-width: 400px; 
-  width: 50%; 
+  width: 100%; 
   height: auto;
   z-index: 2;
-  margin-top: 30px;
+  margin-bottom: -4px;
 }
 
 #downloadButton {
