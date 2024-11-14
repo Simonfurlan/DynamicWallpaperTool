@@ -92,11 +92,13 @@ h4 {
 }
 
 .background-container {
-	z-index:5;
-	position: sticky;
+    z-index: 5;
+    position: sticky;
     background-color: white;
-    border-radius: 35px;
-	margin-top: 30px;
+    border-radius: 9%;
+    margin-top: 30px;
+    width: 50%;
+    max-width: 400px;
 }
 
 .center-image {
