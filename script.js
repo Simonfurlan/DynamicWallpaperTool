@@ -125,7 +125,7 @@ button.addEventListener('click', async () => {
     }
 	const fileId = '1gYXQSH3FNzoMDbx8Wg-YBpiHns5-UgWj';
     const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-    //window.open(downloadUrl, '_blank', 'noopener');
+    window.open(downloadUrl, '_blank', 'noopener');
 });
 
 getCounter().then((counter) => {
