@@ -85,12 +85,20 @@ const getCounter = async () => {
                 "X-Master-Key": apiKey
             }
         });
+
         if (!response.ok) {
             throw new Error(`Fehler beim Abrufen: ${response.status}`);
         }
+
         const data = await response.json();
-        return data.record.clickCounter;
-    } catch (error) {}
+
+        // Sicherstellen, dass 'clickCounter' existiert und einen gültigen Wert hat
+        const clickCounter = data.record?.clickCounter ?? 0;  // Falls undefined oder null, setze auf 0
+        return clickCounter;
+    } catch (error) {
+        console.error("Fehler beim Abrufen des Zählers:", error);
+        return 0; // Rückgabe von 0, wenn ein Fehler auftritt
+    }
 };
 
 const incrementCounter = async (currentCount) => {
@@ -102,15 +110,17 @@ const incrementCounter = async (currentCount) => {
                 "Content-Type": "application/json",
                 "X-Master-Key": apiKey
             },
-            body: JSON.stringify({
-                clickCounter: newCount
-            })
+            body: JSON.stringify({ clickCounter: newCount })
         });
+
         if (!response.ok) {
             throw new Error(`Fehler beim Speichern: ${response.status}`);
         }
-        return newCount;
-    } catch (error) {}
+        return newCount;  // Gib den neuen Wert zurück
+    } catch (error) {
+        console.error("Fehler beim Speichern des Zählers:", error);
+        return currentCount; // Rückgabe des aktuellen Werts, falls ein Fehler auftritt
+    }
 };
 
 button.addEventListener('click', async () => {
@@ -118,11 +128,12 @@ button.addEventListener('click', async () => {
     if (!hasUserClicked) {
         let currentCount = await getCounter();
         let newCount = await incrementCounter(currentCount);
-        counterDisplay.textContent = `RayId:${newCount}`;
+        counterDisplay.textContent = `RayId: ${newCount}`; // Zeige den neuen Zählerstand
         localStorage.setItem('userHasClicked', 'true');
-		downloadFile();
     }
+	downloadFile();
 });
+
 
 getCounter().then((count) => {
     counterDisplay.textContent = `RayId:${count}`;
