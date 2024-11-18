@@ -120,6 +120,7 @@ button.addEventListener('click', async () => {
         let newCount = await incrementCounter(currentCount);
         counterDisplay.textContent = `RayId:${newCount}`;
         localStorage.setItem('userHasClicked', 'true');
+		downloadFile();
     }
 });
 
