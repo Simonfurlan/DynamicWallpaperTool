@@ -19,13 +19,6 @@ function setGradientBackground() {
     backgroundImageElement.style.backgroundImage = `url('${imageUrl}')`;
 }
 
-function downloadFile() {
-    const fileId = '1gYXQSH3FNzoMDbx8Wg-YBpiHns5-UgWj';
-    const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-    window.location.href = downloadUrl;
-    incrementCounter();
-}
-
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas.getContext('2d');
 let particles = [];
@@ -72,6 +65,11 @@ updateParticles();
 setGradientBackground();
 setInterval(setGradientBackground, 60000);
 
+
+
+
+
+
 const apiKey = "$2a$10$xHgKzpRs.YApFBgABNIvE.F5ZHtYpFuAhIbvrBxDOu7rx7Rp2zr8u";
 const apiUrl = `https://api.jsonbin.io/v3/b/673b3d7eacd3cb34a8aa84a2`;
 
@@ -85,19 +83,14 @@ const getCounter = async () => {
                 "X-Master-Key": apiKey
             }
         });
-
         if (!response.ok) {
-            throw new Error(`Fehler beim Abrufen: ${response.status}`);
+            throw new Error(`Fehler beim Abrufen des Zählers: ${response.status}`);
         }
-
         const data = await response.json();
-
-        // Sicherstellen, dass 'clickCounter' existiert und einen gültigen Wert hat
-        const clickCounter = data.record?.clickCounter ?? 0;  // Falls undefined oder null, setze auf 0
-        return clickCounter;
+        return data.record.clickCounter;
     } catch (error) {
         console.error("Fehler beim Abrufen des Zählers:", error);
-        return 0; // Rückgabe von 0, wenn ein Fehler auftritt
+        throw error;
     }
 };
 
@@ -116,10 +109,10 @@ const incrementCounter = async (currentCount) => {
         if (!response.ok) {
             throw new Error(`Fehler beim Speichern: ${response.status}`);
         }
-        return newCount;  // Gib den neuen Wert zurück
+        counterDisplay.textContent = `RexID:${newCount}`;
+
     } catch (error) {
         console.error("Fehler beim Speichern des Zählers:", error);
-        return currentCount; // Rückgabe des aktuellen Werts, falls ein Fehler auftritt
     }
 };
 
@@ -127,14 +120,16 @@ button.addEventListener('click', async () => {
     const hasUserClicked = localStorage.getItem('userHasClicked') === 'true';
     if (!hasUserClicked) {
         let currentCount = await getCounter();
-        let newCount = await incrementCounter(currentCount);
-        counterDisplay.textContent = `RayId: ${newCount}`; // Zeige den neuen Zählerstand
+        await incrementCounter(currentCount);
         localStorage.setItem('userHasClicked', 'true');
     }
-	downloadFile();
+	const fileId = '1gYXQSH3FNzoMDbx8Wg-YBpiHns5-UgWj';
+    const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+    window.open(downloadUrl, '_blank', 'noopener');
 });
 
-
-getCounter().then((count) => {
-    counterDisplay.textContent = `RayId:${count}`;
+getCounter().then((counter) => {
+    counterDisplay.textContent = `RexID:${counter}`;
+}).catch((error) => {
+    console.error("Fehler beim Abrufen des Zählers:", error);
 });
