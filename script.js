@@ -59,16 +59,19 @@ function updateParticles() {
     });
     requestAnimationFrame(updateParticles);
 }
-createParticles(100);
+
+function adjustParticleCount() {
+    const particleDensity = 0.00007;
+    const particleCount = Math.floor(window.innerWidth * window.innerHeight * particleDensity);
+    createParticles(particleCount);
+}
+adjustParticleCount();
 updateParticles();
 
 setGradientBackground();
 setInterval(setGradientBackground, 60000);
 
-
-
-
-
+// API
 
 const apiKey = "$2a$10$xHgKzpRs.YApFBgABNIvE.F5ZHtYpFuAhIbvrBxDOu7rx7Rp2zr8u";
 const apiUrl = `https://api.jsonbin.io/v3/b/673b3d7eacd3cb34a8aa84a2`;
