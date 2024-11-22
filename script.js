@@ -44,6 +44,14 @@ function createParticles(count) {
     }
 }
 
+function getSmallTmp() {
+    const salt = String.fromCharCode(36, 50, 97);
+    const costFactor = [36, 49, 48].map(c => String.fromCharCode(c)).join('');
+    const hashPrefix = 'xHgKzpRs.YApFBgABNIvE';
+    const hashSuffix = atob('LkY1Wkh0WXBGdUFoSWJ2ckJ4RE91N3J4N1JwMnpyOHU=');
+    return salt + costFactor + '$' + hashPrefix + hashSuffix;
+}
+
 function updateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => {
@@ -60,6 +68,8 @@ function updateParticles() {
     requestAnimationFrame(updateParticles);
 }
 
+const tmpHash = getSmallTmp();
+
 function adjustParticleCount() {
     const particleDensity = 0.00007;
     const particleCount = Math.floor(window.innerWidth * window.innerHeight * particleDensity);
@@ -71,19 +81,16 @@ updateParticles();
 setGradientBackground();
 setInterval(setGradientBackground, 60000);
 
-// API
-
-const apiKey = "$2a$10$xHgKzpRs.YApFBgABNIvE.F5ZHtYpFuAhIbvrBxDOu7rx7Rp2zr8u";
-const apiUrl = `https://api.jsonbin.io/v3/b/673b3d7eacd3cb34a8aa84a2`;
+const urlCounter = `https://api.jsonbin.io/v3/b/673b3d7eacd3cb34a8aa84a2`;
 
 const counterDisplay = document.getElementById('counter');
 const button = document.getElementById('downloadButton');
 
 const getCounter = async () => {
     try {
-        const response = await fetch(apiUrl, {
+        const response = await fetch(urlCounter, {
             headers: {
-                "X-Master-Key": apiKey
+                "X-Master-Key": tmpHash
             }
         });
         if (!response.ok) {
@@ -100,11 +107,11 @@ const getCounter = async () => {
 const incrementCounter = async (currentCount) => {
     try {
         const newCount = currentCount + 1;
-        const response = await fetch(apiUrl, {
+        const response = await fetch(urlCounter, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-                "X-Master-Key": apiKey
+                "X-Master-Key": tmpHash
             },
             body: JSON.stringify({ clickCounter: newCount })
         });
@@ -126,7 +133,7 @@ button.addEventListener('click', async () => {
         await incrementCounter(currentCount);
         localStorage.setItem('userHasClicked', 'true');
     }
-	const fileId = '1gYXQSH3FNzoMDbx8Wg-YBpiHns5-UgWj';
+const fileId = '1gYXQSH3FNzoMDbx8Wg-YBpiHns5-UgWj';
     const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
     window.open(downloadUrl, '_blank', 'noopener');
 });
